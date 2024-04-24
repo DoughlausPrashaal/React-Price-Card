@@ -1,33 +1,64 @@
 import React, { useState, useEffect } from 'react'; 
 import './App.css'
 
-const App = () => {
-  const [plans, setPlans] = useState(null);
-
-  useEffect(() => {
-    // Fetching JSON data from the file
-    fetch('./src/assets/Data.json')
-      .then(response => response.json())
-      .then(data => setPlans(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-
-  if (!plans) {
-    return <div>Loading...</div>;
+const plansData = {
+  "Essential": {
+    "Description": "Monthly games, online multiplayer and more",
+    "Price": 499,
+    "Monthly Games": true,
+    "Online Multiplayer": true,
+    "Exclusive Discounts": true,
+    "Exclusive Content": true,
+    "Cloud Storage": true,
+    "Share Play": true,
+    "Game Catalogue": false,
+    "Ubisoft Plus Classics": false,
+    "Classics Catalogue": false,
+    "Game Trials": false
+  },
+  "Extra": {
+    "Description": "Discover hundreds of games",
+    "Price": 749,
+    "Monthly Games": true,
+    "Online Multiplayer": true,
+    "Exclusive Discounts": true,
+    "Exclusive Content": true,
+    "Cloud Storage": true,
+    "Share Play": true,
+    "Game Catalogue": true,
+    "Ubisoft Plus Classics": true,
+    "Classics Catalogue": false,
+    "Game Trials": false
+  },
+  "Deluxe": {
+    "Description": "Experience all the benefits",
+    "Price": 849,
+    "Monthly Games": true,
+    "Online Multiplayer": true,
+    "Exclusive Discounts": true,
+    "Exclusive Content": true,
+    "Cloud Storage": true,
+    "Share Play": true,
+    "Game Catalogue": true,
+    "Ubisoft Plus Classics": true,
+    "Classics Catalogue": true,
+    "Game Trials": true
   }
+};
 
+function App() {
   return (
     <div className="container">
-      {Object.keys(plans).map(plan => (
+      {Object.keys(plansData).map(plan => (
         <div key={plan} className="card">
           <h2>{plan}</h2>
-          <p>{plans[plan].Description}</p>
-          <p>Price: Rs {plans[plan].Price}</p>
+          <p>{plansData[plan].Description}</p>
+          <p>Price: Rs {plansData[plan].Price}</p>
           <ul>
-            {Object.keys(plans[plan]).map(feature => (
+            {Object.keys(plansData[plan]).map(feature => (
               feature !== "Description" && feature !== "Price" && (
                 <li key={feature}>
-                  {plans[plan][feature] ? <span className="tick">&#10004;</span> : <span className="cross">&#10006;</span>} {feature}
+                  {plansData[plan][feature] ? <span className="tick">&#10004;</span> : <span className="cross">&#10006;</span>} {feature}
                 </li>
               )
             ))}
@@ -37,6 +68,5 @@ const App = () => {
     </div>
   );
 }
-
 
 export default App
