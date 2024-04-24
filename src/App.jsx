@@ -6,7 +6,7 @@ const App = () => {
 
   useEffect(() => {
     // Fetching JSON data from the file
-    fetch('src/assets/data.json')
+    fetch('./src/assets/Data.json')
       .then(response => response.json())
       .then(data => setPlans(data))
       .catch(error => console.error('Error fetching data:', error));
